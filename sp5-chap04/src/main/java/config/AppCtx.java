@@ -1,6 +1,7 @@
 package config;
 
 import jdk.nashorn.internal.runtime.Version;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import spring.MemberInfoPrinter;
@@ -19,19 +20,26 @@ public class AppCtx
     @Bean
     public MemberRegisterService memberRegSvc()
     {
-        return new MemberRegisterService(memberDao()); // DI
+        return new MemberRegisterService();
     }
 
     @Bean
     public ChangePasswordService changePwdSvc()
     {
+        // ChangePasswordService 객체가 의존하는 MemberDao 객체에 @Autowired 애노테이션
         ChangePasswordService pwdSvc = new ChangePasswordService();
-        pwdSvc.setMemberDao(memberDao());
         return pwdSvc;
     }
 
     @Bean
-    public MemberPrinter memberPrinter()
+    @Qualifier("printer")
+    public MemberPrinter memberPrinter1()
+    {
+        return new MemberPrinter();
+    }
+
+    @Bean
+    public MemberPrinter memberPrinter2()
     {
         return new MemberPrinter();
     }
@@ -39,7 +47,7 @@ public class AppCtx
     @Bean
     public MemberListPrinter listPrinter()
     {
-        return new MemberListPrinter(memberDao(), memberPrinter());
+        return new MemberListPrinter();
     }
 
     @Bean
