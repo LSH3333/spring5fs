@@ -13,7 +13,7 @@ public class MemberListPrinter
         this.printer = memberPrinter;
     }
 
-    public void PrintAll()
+    public void printAll()
     {
         Collection<Member> members = memberDao.selectAll();
         members.forEach(m -> printer.print(m));
