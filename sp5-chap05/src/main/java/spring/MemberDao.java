@@ -1,10 +1,14 @@
 package spring;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+
 // Member DB
+@Component
 public class MemberDao
 {
     private static long nextId = 0;

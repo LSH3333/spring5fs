@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 // ApplicationContext
-import jdk.nashorn.internal.runtime.Version;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -71,7 +70,7 @@ public class MainForSpring
         }
 
         // get Bean object
-        MemberRegisterService regSvc = ctx.getBean("memberRegSvc", MemberRegisterService.class);
+        MemberRegisterService regSvc = ctx.getBean(MemberRegisterService.class);
         RegisterRequest req = new RegisterRequest();
         req.setEmail(arg[1]);
         req.setName(arg[2]);
@@ -101,7 +100,7 @@ public class MainForSpring
             return;
         }
 
-        ChangePasswordService changePwdSvc = ctx.getBean("changePwdSvc", ChangePasswordService.class);
+        ChangePasswordService changePwdSvc = ctx.getBean(ChangePasswordService.class);
         try
         {
             changePwdSvc.changePassword(arg[1], arg[2], arg[3]);
