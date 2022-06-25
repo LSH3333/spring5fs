@@ -17,6 +17,8 @@ public class main
         Client client = ctx.getBean(Client.class);
         client.send();
 
+        
+
         // 없을시 destroy 실행되지 않음
         ctx.close();
     }
