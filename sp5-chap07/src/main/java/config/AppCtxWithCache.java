@@ -21,7 +21,6 @@ public class AppCtxWithCache
     {
         return new ExeTimeAspect();
     }
-    
 
     // ExeTimeAspect 의 measure 메소드가 적용됨
     @Bean
@@ -29,6 +28,4 @@ public class AppCtxWithCache
     {
         return new RecCalculator();
     }
-
-
 }
