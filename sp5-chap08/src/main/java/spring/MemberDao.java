@@ -1,5 +1,8 @@
 package spring;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +12,13 @@ public class MemberDao
 {
     private static long nextId = 0;
     private Map<String, Member> map = new HashMap<>();
+
+    private JdbcTemplate jdbcTemplate;
+
+    public MemberDao(DataSource dataSource)
+    {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     public Member selectByEmail(String email)
     {
