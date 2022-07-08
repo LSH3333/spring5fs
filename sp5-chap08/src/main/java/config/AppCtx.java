@@ -14,8 +14,9 @@ public class AppCtx
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver"); // Driver 클래스 지정
         ds.setUrl("jdbc:mysql://localhost:3306/spring5fs?characterEncoding=utf8");
+//        ds.setUrl("jdbc:mysql://localhost:3306/spring5fs?serverTimezone=UTC&useSSL=false&characterEncoding=utf8");
         ds.setUsername("spring5");
-        ds.setPassword("spring5");
+        ds.setPassword("1234");
         ds.setInitialSize(2); // 커넥션풀을 2개 만들어 놓는다
         ds.setMaxActive(10); // 활성 상태 가능한 최대 커넥션 개수 10
         // 10초 주기로 유휴 커넥션이 유효한지 여부 검사, 최소 유휴 시간 3분으로 지정

@@ -1,23 +1,23 @@
 package spring;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 // Member DB
 public class MemberDao
 {
-    private static long nextId = 0;
-    private Map<String, Member> map = new HashMap<>();
 
     private JdbcTemplate jdbcTemplate;
 
@@ -53,15 +53,15 @@ public class MemberDao
         return results.isEmpty() ? null : results.get(0);
     }
 
-    // Member Insert 
-    // update 메소드에 PreparedStatementCreator 전달 
+    // Member Insert
+    // update 메소드에 PreparedStatementCreator 전달
     public void insert(final Member member)
     {
-        KeyHolder keyHolder = new GeneratedKeyHolder(); // update 메소드에 KeyHolder 객체 전달 
-        jdbcTemplate.update(new PreparedStatementCreator() 
+        KeyHolder keyHolder = new GeneratedKeyHolder(); // update 메소드에 KeyHolder 객체 전달
+        jdbcTemplate.update(new PreparedStatementCreator()
         {
             @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException 
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
             {
                 PreparedStatement pstmt = connection.prepareStatement(
                         "insert into MEMBER (EMAIL, PASSWORD, NAME, REGDATE) " + "values(?,?,?,?)",
@@ -73,16 +73,16 @@ public class MemberDao
                 pstmt.setTimestamp(4, Timestamp.valueOf(member.getRegisterDateTime()));
                 return pstmt;
             }
-        }, keyHolder); // end of update method 
-        
-        Number keyValue = keyHolder.getKey(); // 자동생성된 키 값을 KeyHolder에 저장 
+        }, keyHolder); // end of update method
+
+        Number keyValue = keyHolder.getKey(); // 자동생성된 키 값을 KeyHolder에 저장
         member.setId(keyValue.longValue());
     }
 
     public void update(Member member)
     {
         // update(String sql, Object...args)
-        jdbcTemplate.update("update MEMBER set NAME = ?, PASSWORD = ? wher EMAIL = ?",
+        jdbcTemplate.update("update MEMBER set NAME = ?, PASSWORD = ? where EMAIL = ?",
                 member.getName(), member.getPassword(), member.getEmail());
     }
 
@@ -97,7 +97,8 @@ public class MemberDao
     {
         // queryForObject(String sql, Class<T> requiredType)
         // 쿼리 실행 결과가 한 행일때 사용 가능
-        Integer count = jdbcTemplate.queryForObject("select count(*) from MEMBER", Integer.class);
+        Integer count = jdbcTemplate.queryForObject(
+                "select count(*) from MEMBER", Integer.class);
         return count;
     }
 
