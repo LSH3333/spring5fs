@@ -53,15 +53,15 @@ public class MemberDao
         return results.isEmpty() ? null : results.get(0);
     }
 
-    // Member Insert
-    // update 메소드에 PreparedStatementCreator 전달
+    // Member Insert 
+    // update 메소드에 PreparedStatementCreator 전달 
     public void insert(final Member member)
     {
-        KeyHolder keyHolder = new GeneratedKeyHolder(); // update 메소드에 KeyHolder 객체 전달
-        jdbcTemplate.update(new PreparedStatementCreator()
+        KeyHolder keyHolder = new GeneratedKeyHolder(); // update 메소드에 KeyHolder 객체 전달 
+        jdbcTemplate.update(new PreparedStatementCreator() 
         {
             @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException 
             {
                 PreparedStatement pstmt = connection.prepareStatement(
                         "insert into MEMBER (EMAIL, PASSWORD, NAME, REGDATE) " + "values(?,?,?,?)",
@@ -73,9 +73,9 @@ public class MemberDao
                 pstmt.setTimestamp(4, Timestamp.valueOf(member.getRegisterDateTime()));
                 return pstmt;
             }
-        }, keyHolder); // end of update method
-
-        Number keyValue = keyHolder.getKey(); // 자동생성된 키 값을 KeyHolder에 저장
+        }, keyHolder); // end of update method 
+        
+        Number keyValue = keyHolder.getKey(); // 자동생성된 키 값을 KeyHolder에 저장 
         member.setId(keyValue.longValue());
     }
 

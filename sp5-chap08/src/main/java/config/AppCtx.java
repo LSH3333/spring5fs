@@ -13,7 +13,7 @@ public class AppCtx
     {
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver"); // Driver 클래스 지정
-        ds.setUrl("jdbc:mysql://localhost/spring5fs?characterEncoding=utf8");
+        ds.setUrl("jdbc:mysql://localhost:3306/spring5fs?characterEncoding=utf8");
         ds.setUsername("spring5");
         ds.setPassword("spring5");
         ds.setInitialSize(2); // 커넥션풀을 2개 만들어 놓는다
