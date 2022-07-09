@@ -3,9 +3,14 @@ package config;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import spring.ChangePasswordService;
 import spring.MemberDao;
 
 @Configuration
+@EnableTransactionManagement // 트랜잭션 관리 활성화ㅌ
 public class AppCtx
 {
     @Bean(destroyMethod = "close") // close 메소드는 커넥션 풀에 보관된 Connection을 닫는다
@@ -33,5 +38,21 @@ public class AppCtx
     {
         // dataSource 빈 객체를 받는다
         return new MemberDao(dataSource());
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager()
+    {
+        DataSourceTransactionManager tm = new DataSourceTransactionManager();
+        tm.setDataSource(dataSource()); // DataSource를 이용해 트랜잭션 연동에 사용할 DataSource를 지정함.
+        return tm;
+    }
+
+    @Bean
+    public ChangePasswordService changePwdSvc()
+    {
+        ChangePasswordService pwdSvc = new ChangePasswordService();
+        pwdSvc.setMemberDao(memberDao()); // 주입
+        return pwdSvc;
     }
 }

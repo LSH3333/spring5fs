@@ -57,5 +57,5 @@ public class Member
             throw new WrongIdPasswordException();
         this.password = newPassWord; // 맞다면 새로운 비밀번호 할당
     }
-    
+
 }
