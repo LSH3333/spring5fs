@@ -1,5 +1,7 @@
 package spring;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class Member
@@ -55,5 +57,5 @@ public class Member
             throw new WrongIdPasswordException();
         this.password = newPassWord; // 맞다면 새로운 비밀번호 할당
     }
-
+    
 }
