@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+2<?xml version="1.0" encoding="UTF-8"?>
 
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -18,7 +18,7 @@
 			</param-value>
 		</init-param>
 		<init-param>
-			<param-name>contextConfigLocation</param-name>
+			<param-name>contextConfigLocation</param-name> 
 			<param-value>
 				config.MvcConfig
 				config.ControllerConfig
