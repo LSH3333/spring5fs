@@ -86,12 +86,19 @@ public class MemberDao
                 member.getName(), member.getPassword(), member.getEmail());
     }
 
-    public List<Member> selectAll()
-    {
-        List<Member> results = jdbcTemplate.query("select * from MEMBER",
-                new MemberRowMapper());
-        return results;
-    }
+    public List<Member> selectAll() {
+		List<Member> results = jdbcTemplate.query("select * from MEMBER",
+				(ResultSet rs, int rowNum) -> {
+					Member member = new Member(
+							rs.getString("EMAIL"),
+							rs.getString("PASSWORD"),
+							rs.getString("NAME"),
+							rs.getTimestamp("REGDATE").toLocalDateTime());
+					member.setId(rs.getLong("ID"));
+					return member;
+				});
+		return results;
+	}
 
     public int count()
     {
