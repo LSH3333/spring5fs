@@ -21,8 +21,9 @@ public class RegisterController
 		String agreeParam = request.getParameter("agree");
 		if(agreeParam == null || !agreeParam.equals("true"))
 		{
-			return "register/step1";
+			return "register/step1"; // 약s관 동의 다시 보여줌 
 		}
+		// 약관 동의했다면 입력 폼 보여주도록 register/step2를 뷰 이름으로 리턴 
 		return "register/step2";
 	}
 
