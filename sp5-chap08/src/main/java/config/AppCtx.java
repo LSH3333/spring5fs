@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import spring.*;
 
 @Configuration
-@EnableTransactionManagement // 트랜잭션 관리 활성화ㅌ
+@EnableTransactionManagement // 트랜잭션 관리 활성화
 public class AppCtx
 {
     @Bean(destroyMethod = "close") // close 메소드는 커넥션 풀에 보관된 Connection을 닫는다

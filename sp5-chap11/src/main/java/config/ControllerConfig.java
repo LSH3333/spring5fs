@@ -10,6 +10,7 @@ import spring.MemberRegisterService;
 @Configuration 
 public class ControllerConfig 
 {
+	// MemberConfig.java에서 빈 객체로 추가됨   
 	@Autowired
 	private MemberRegisterService memberRegSvc;
 	
