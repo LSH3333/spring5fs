@@ -3,6 +3,7 @@ package config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -23,5 +24,13 @@ public class MvcConfig implements WebMvcConfigurer
 	{ 
 		// JSP 를 이용해 컨트롤러의 실행 결과를 보여주도록 함 
 		registry.jsp("/WEB-INF/view/", ".jsp");
+	}
+	
+	// WebMvcConfigurer 인터페이스에 정의됨 
+	// 요청 경로 - 뷰 이름 연결 
+	@Override 
+	public void addViewControllers(ViewControllerRegistry registry) 
+	{
+		registry.addViewController("/main").setViewName("main");
 	}
 }
