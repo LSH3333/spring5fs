@@ -1,9 +1,11 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.DuplicateMemberException;
 import spring.MemberRegisterService;
@@ -28,14 +30,12 @@ public class RegisterController
 	}
 	
 	@PostMapping("/register/step2")
-	public String handleStep2(HttpServletRequest request)
+	public String handleStep2(
+			@RequestParam(value = "agree", defaultValue="false") Boolean agree, Model model)
 	{
-		// agree 파라미터의 value 
-		String agreeParam = request.getParameter("agree");
-		if(agreeParam == null || !agreeParam.equals("true"))
-		{
-			return "register/step1"; // 약관 동의 다시 보여줌 
-		}
+		 if(!agree) return "register/step1";
+		 // step2 페이지 이동 전에 커맨드 객체 생성 
+		 model.addAttribute("registerRequest", new RegisterRequest());
 		// 약관 동의했다면 입력 폼 보여주도록 register/step2를 뷰 이름으로 리턴 
 		return "register/step2";
 	}
@@ -60,4 +60,6 @@ public class RegisterController
 			return "register/step2";
 		}
 	}
+	
+
 }
