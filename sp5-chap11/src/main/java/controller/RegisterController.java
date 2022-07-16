@@ -11,7 +11,6 @@ import spring.DuplicateMemberException;
 import spring.MemberRegisterService;
 import spring.RegisterRequest;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RegisterController 
