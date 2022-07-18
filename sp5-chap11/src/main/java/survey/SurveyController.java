@@ -9,18 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/survey") // 이 클래스는 "/survey" 경로 처리  
 public class SurveyController 
 {
 	// GET 방식의 "/survey" 경로 요청 처리 (주소창 직접 입력은 GET 방식) 
+//	@GetMapping
+//	public String form(Model model) 
+//	{
+//		List<Question> questions = createQuestions();
+//		model.addAttribute("questions", questions);		
+//		return "survey/surveyForm";			
+//	}
+	
 	@GetMapping
-	public String form(Model model) 
+	public ModelAndView form()
 	{
 		List<Question> questions = createQuestions();
-		model.addAttribute("questions", questions);		
-		return "survey/surveyForm";			
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(questions); // 뷰에 전달할 모델 데이터 추가 
+		mav.setViewName("survey/surveyForm"); // 뷰 이름 설정 
+		return mav;
 	}
 	
 	private List<Question> createQuestions() 

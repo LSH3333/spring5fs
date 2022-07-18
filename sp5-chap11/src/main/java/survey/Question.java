@@ -29,6 +29,7 @@ public class Question
 		return options;
 	}
 	
+	// getter 
 	// true시 객관식  
 	public boolean isChoice() 
 	{
