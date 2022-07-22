@@ -57,5 +57,11 @@ public class Member
             throw new WrongIdPasswordException();
         this.password = newPassWord; // 맞다면 새로운 비밀번호 할당
     }
+    
+    // 암호 일치 여부 확인 
+    public boolean matchPassword(String password) 
+    {
+    	return this.password.equals(password);
+    }
 
 }
