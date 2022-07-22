@@ -51,9 +51,9 @@ public class MvcConfig implements WebMvcConfigurer
 	}
 	
 	// 스프링은 getValidator()가 리턴한 객체를 글로벌 범위 Validator로 사용 
-	@Override 
-	public Validator getValidator() 
-	{
-		return new RegisterRequestValidator();
-	}
+//	@Override 
+//	public Validator getValidator() 
+//	{
+//		return new RegisterRequestValidator();
+//	}
 }
