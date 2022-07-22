@@ -33,7 +33,7 @@
 	<p>
 		<label><spring:message code="password.confirm"/>:<br>
 		<form:password path="confirmPassword" />
-		<form:errors path="comfirmPassword" />
+		<form:errors path="confirmPassword" />
 		</label>
 	</p>
 	<input type="submit" value="<spring:message code="register.btn"/>">

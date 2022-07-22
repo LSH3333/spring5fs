@@ -74,11 +74,11 @@ public class RegisterController
 	
 	// @Valid 가 붙은 커맨드 객체 검사할 Validator 설정 
 	// 컨트롤러의 요청 처리 메서드 실행 전 매번 실행 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) 
-	{
-		binder.setValidator(new RegisterRequestValidator());
-	} 
+//	@InitBinder
+//	protected void initBinder(WebDataBinder binder) 
+//	{
+//		binder.setValidator(new RegisterRequestValidator());
+//	} 
 	
 
 }
