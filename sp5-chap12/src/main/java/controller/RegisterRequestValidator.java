@@ -23,6 +23,7 @@ public class RegisterRequestValidator implements Validator
 		pattern = Pattern.compile(emailRegExp);
 	}
 
+	// Validator의 supports 메서드는 주어지는 clazz가 커맨드 객체와 호환가능한지 검사한다 
 	@Override
 	public boolean supports(Class<?> clazz) 
 	{	
@@ -30,6 +31,7 @@ public class RegisterRequestValidator implements Validator
 		return RegisterRequest.class.isAssignableFrom(clazz);
 	}
 
+	// validate 메서드는 에러가 있는지 검사한다 
 	// target: 검사 대상 객체 
 	@Override	
 	public void validate(Object target, Errors errors) 
