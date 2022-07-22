@@ -1,9 +1,13 @@
 package controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,10 +53,11 @@ public class RegisterController
 
 	// 회원가입 form 데이터 받아서 처리하고 step3 (회원가입 완료 페이지) 이동 
 	@PostMapping("/register/step3")
-	public String handleStep3(RegisterRequest regReq, Errors errors)
+	public String handleStep3(@Valid RegisterRequest regReq, Errors errors)
 	{
 		// 에러 있다면 step2 로 되돌아감 
-		new RegisterRequestValidator().validate(regReq, errors);
+		// @Valid에서 처리 
+//		new RegisterRequestValidator().validate(regReq, errors);
 		if(errors.hasErrors()) return "register/step2";
 		
 		try 
@@ -64,7 +69,16 @@ public class RegisterController
 			errors.rejectValue("email", "duplicate");
 			return "register/step2";
 		}
+			
 	}
+	
+	// @Valid 가 붙은 커맨드 객체 검사할 Validator 설정 
+	// 컨트롤러의 요청 처리 메서드 실행 전 매번 실행 
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) 
+	{
+		binder.setValidator(new RegisterRequestValidator());
+	} 
 	
 
 }
